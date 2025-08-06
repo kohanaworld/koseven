@@ -1,4 +1,6 @@
-<?php echo $error; ?>
+<?php if (!empty($error)) {
+	echo $error;
+} ?>
 
 Run 
 

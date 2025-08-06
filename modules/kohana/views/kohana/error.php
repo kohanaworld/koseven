@@ -47,42 +47,54 @@ $error_id = uniqid('error');
     }
 </script>
 <div id="kohana_error">
-    <h1><span class="type"><?php echo $class ?> [ <?php echo $code ?> ]:</span> <span class="message"><?php echo htmlspecialchars( (string) $message, ENT_QUOTES | ENT_IGNORE, KO7::$charset, TRUE); ?></span></h1>
+    <h1><span class="type"><?php if (!empty($class)) {
+				echo $class;
+			} ?> [ <?php if (!empty($code)) {
+				echo $code;
+			} ?> ]:</span> <span class="message"><?php if (!empty($message)) {
+				echo htmlspecialchars( (string) $message, ENT_QUOTES | ENT_IGNORE, KO7::$charset, TRUE);
+			} ?></span></h1>
     <div id="<?php echo $error_id ?>" class="content">
-        <p><span class="file"><?php echo Debug::path($file) ?> [ <?php echo $line ?> ]</span></p>
+        <p><span class="file"><?php if (!empty($file)) {
+					echo Debug::path($file);
+				} ?> [ <?php if (!empty($line)) {
+					echo $line;
+				} ?> ]</span></p>
         <?php echo Debug::source($file, $line) ?>
         <ol class="trace">
-            <?php foreach (Debug::trace($trace) as $i => $step): ?>
-                <li>
-                    <p>
-					<span class="file">
-						<?php if ($step['file']): $source_id = $error_id.'source'.$i; ?>
-                            <a href="#<?php echo $source_id ?>" onclick="return koggle('<?php echo $source_id ?>')"><?php echo Debug::path($step['file']) ?> [ <?php echo $step['line'] ?> ]</a>
-                        <?php else: ?>
-                            {<?php echo I18n::get('PHP internal call') ?>}
-                        <?php endif ?>
-					</span>
-                        &raquo;
-                        <?php echo $step['function'] ?>(<?php if ($step['args']): $args_id = $error_id.'args'.$i; ?><a href="#<?php echo $args_id ?>" onclick="return koggle('<?php echo $args_id ?>')"><?php echo I18n::get('arguments') ?></a><?php endif ?>)
-                    </p>
-                    <?php if (isset($args_id)): ?>
-                        <div id="<?php echo $args_id ?>" class="collapsed">
-                            <table cellspacing="0">
-                                <?php foreach ($step['args'] as $name => $arg): ?>
-                                    <tr>
-                                        <td><code><?php echo $name ?></code></td>
-                                        <td><pre><?php echo Debug::dump($arg) ?></pre></td>
-                                    </tr>
-                                <?php endforeach ?>
-                            </table>
-                        </div>
-                    <?php endif ?>
-                    <?php if (isset($source_id)): ?>
-                        <pre id="<?php echo $source_id ?>" class="source collapsed"><code><?php echo $step['source'] ?></code></pre>
-                    <?php endif ?>
-                </li>
-                <?php unset($args_id, $source_id); ?>
-            <?php endforeach ?>
+            <?php if (!empty($trace)) {
+				foreach (Debug::trace($trace) as $i => $step): ?>
+					<li>
+						<p>
+						<span class="file">
+							<?php if ($step['file']): $source_id = $error_id.'source'.$i; ?>
+								<a href="#<?php echo $source_id ?>" onclick="return koggle('<?php echo $source_id ?>')"><?php echo Debug::path($step['file']) ?> [ <?php echo $step['line'] ?> ]</a>
+							<?php else: ?>
+								{<?php echo I18n::get('PHP internal call') ?>}
+							<?php endif ?>
+						</span>
+							&raquo;
+							<?php echo $step['function'] ?>(<?php if ($step['args']): $args_id = $error_id.'args'.$i; ?><a href="#<?php echo $args_id ?>" onclick="return koggle('<?php echo $args_id ?>')"><?php echo I18n::get('arguments') ?></a><?php endif ?>)
+						</p>
+						<?php if (isset($args_id)): ?>
+							<div id="<?php echo $args_id ?>" class="collapsed">
+								<table cellspacing="0">
+									<?php foreach ($step['args'] as $name => $arg): ?>
+										<tr>
+											<td><code><?php echo $name ?></code></td>
+											<td><pre><?php echo Debug::dump($arg) ?></pre></td>
+										</tr>
+									<?php endforeach ?>
+								</table>
+							</div>
+						<?php endif ?>
+						<?php if (isset($source_id)): ?>
+							<pre id="<?php echo $source_id ?>" class="source collapsed"><code><?php echo $step['source'] ?></code></pre>
+						<?php endif ?>
+					</li>
+					<?php unset($args_id, $source_id); ?>
+				<?php endforeach;
+			} ?>
         </ol>
     </div>
     <h2><a href="#<?php echo $env_id = $error_id.'environment' ?>" onclick="return koggle('<?php echo $env_id ?>')"><?php echo I18n::get('Environment') ?></a></h2>

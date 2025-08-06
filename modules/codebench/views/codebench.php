@@ -15,9 +15,11 @@
 <head>
 
 	<meta charset="utf-8" />
-	<title><?php if ($class !== ''): ?>
-			<?php echo $class, ' · ' ?>
-		<?php endif; ?>Codebench</title>
+	<title><?php if (!empty($class)) {
+			if ($class !== ''): ?>
+					<?php echo $class, ' · ' ?>
+				<?php endif;
+		} ?>Codebench</title>
 
 	<style>
 		/* General styles*/

@@ -160,7 +160,9 @@ abstract class KO7_Controller_Userguide extends Controller_Template {
 		$this->template->menu = Kodoc_Markdown::markdown($this->_get_all_menu_markdown());
 
 		// Bind the breadcrumb
-		$this->template->bind('breadcrumb', $breadcrumb);
+		if (!empty($breadcrumb)) {
+			$this->template->bind('breadcrumb', $breadcrumb);
+		}
 
 		// Bind the copyright
 		$this->template->copyright = KO7::$config->load('userguide.modules.'.$module.'.copyright');
@@ -229,7 +231,9 @@ abstract class KO7_Controller_Userguide extends Controller_Template {
 		$this->template->menu = Kodoc::menu();
 
 		// Bind the breadcrumb
-		$this->template->bind('breadcrumb', $breadcrumb);
+		if (!empty($breadcrumb)) {
+			$this->template->bind('breadcrumb', $breadcrumb);
+		}
 
 		// Add the breadcrumb
 		$breadcrumb = [];

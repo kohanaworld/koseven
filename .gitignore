@@ -21,3 +21,4 @@ composer.lock
 /build/logs/
 /memory
 /.phpunit.cache/code-coverage/
+/.env

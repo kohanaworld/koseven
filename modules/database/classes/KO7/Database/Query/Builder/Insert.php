@@ -54,7 +54,7 @@ class KO7_Database_Query_Builder_Insert extends Database_Query_Builder {
 	public function table($table)
 	{
 		if ( ! is_string($table))
-			throw new KO7_Exception('INSERT INTO syntax does not allow table aliasing');
+			throw new KO7_Exception('--INSERT INTO syntax does not allow table aliasing');
 
 		$this->_table = $table;
 
@@ -85,7 +85,7 @@ class KO7_Database_Query_Builder_Insert extends Database_Query_Builder {
 	{
 		if ( ! is_array($this->_values))
 		{
-			throw new KO7_Exception('INSERT INTO ... SELECT statements cannot be combined with INSERT INTO ... VALUES');
+			throw new KO7_Exception('--INSERT INTO ... SELECT statements cannot be combined with INSERT INTO ... VALUES');
 		}
 
 		// Get all of the passed values

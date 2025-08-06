@@ -5,6 +5,8 @@
 [![License](https://poser.pugx.org/koseven/koseven/license.svg)](https://packagist.org/packages/koseven/koseven)
 [![Github Issues](https://img.shields.io/github/issues/koseven/koseven.svg)](https://github.com/koseven/koseven/issues)
 
+## [PHP 8.3 ready branch](https://github.com/koseven/koseven/tree/php8.3)
+
 ## [Download 3.3.9](https://github.com/koseven/koseven/releases/tag/3.3.9)
 
 Koseven is an elegant, open source, and object oriented HMVC framework built using PHP7, by a team of volunteers. It aims to be swift, secure, and small. It is based and nearly full compatible on defunct [Kohana](http://kohanaframework.org/) 3.3.X.
@@ -59,6 +61,32 @@ This will help us to fix the issue as quickly as possible, and if you'd like to 
 ## Contributing
 
 Any help is more than welcome! Please see [Contributing](CONTRIBUTING.md) for detailed Instructions.
+
+## Docker
+```
+cp .env.dist .env
+docker compose up -d
+docker compose exec koseven bash
+```
+
+#### Inside container
+```shell
+service redis-server start
+cd /var/www
+git config --global --add safe.directory /var/www
+composer self-update
+composer diagnose
+composer install
+```
+
+## Unittests
+```shell
+# For clear cache
+service redis-server restart
+vendor/bin/phpunit
+# Switch PHP version
+update-alternatives --config php
+```
 
 ## Special Thanks
 

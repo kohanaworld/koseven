@@ -1,3 +1,5 @@
 <h1>Kodoc - <?php echo 'Error'; ?></h1>
 
-<p><?php echo $message ?></p>
+<p><?php if (!empty($message)) {
+		echo $message;
+	} ?></p>

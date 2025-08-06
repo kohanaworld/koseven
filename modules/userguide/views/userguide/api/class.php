@@ -1,7 +1,11 @@
 <h1>
-	<?php echo $doc->modifiers, $doc->class->name ?>
+	<?php if (!empty($doc)) {
+		echo $doc->modifiers, $doc->class->name;
+	} ?>
 	<?php foreach ($doc->parents as $parent): ?>
-	<br/><small>extends <?php echo HTML::anchor($route->uri(['class' => $parent->name]), $parent->name, NULL, NULL, TRUE) ?></small>
+	<br/><small>extends <?php if (!empty($route)) {
+				echo HTML::anchor($route->uri(['class' => $parent->name]), $parent->name, NULL, NULL, TRUE);
+			} ?></small>
 	<?php endforeach; ?>
 </h1>
 

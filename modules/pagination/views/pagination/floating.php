@@ -10,14 +10,18 @@ $count_in = ( ! empty($config['count_in'])) ? (int) $config['count_in'] : 5;
 
 // Beginning group of pages: $n1...$n2
 $n1 = 1;
-$n2 = min($count_out, $total_pages);
+if (!empty($total_pages)) {
+	$n2 = min($count_out, $total_pages);
+}
 
 // Ending group of pages: $n7...$n8
 $n7 = max(1, $total_pages - $count_out + 1);
 $n8 = $total_pages;
 
 // Middle group of pages: $n4...$n5
-$n4 = max($n2 + 1, $current_page - $count_in);
+if (!empty($current_page)) {
+	$n4 = max($n2 + 1, $current_page - $count_in);
+}
 $n5 = min($n7 - 1, $current_page + $count_in);
 $use_middle = ($n5 >= $n4);
 
@@ -57,17 +61,23 @@ for ($i = $n7; $i <= $n8; ++$i)
 ?>
 <p class="pagination">
 
-	<?php if ($first_page !== FALSE): ?>
-		<a href="<?php echo HTML::chars($page->url($first_page)) ?>" rel="first"><?php echo I18n::get('First') ?></a>
-	<?php else: ?>
-		<?php echo I18n::get('First') ?>
-	<?php endif ?>
+	<?php if (!empty($first_page)) {
+		if ($first_page !== FALSE): ?>
+			<a href="<?php if (!empty($page)) {
+				echo HTML::chars($page->url($first_page));
+			} ?>" rel="first"><?php echo I18n::get('First') ?></a>
+		<?php else: ?>
+			<?php echo I18n::get('First') ?>
+		<?php endif;
+	} ?>
 
-	<?php if ($previous_page !== FALSE): ?>
-		<a href="<?php echo HTML::chars($page->url($previous_page)) ?>" rel="prev"><?php echo I18n::get('Previous') ?></a>
-	<?php else: ?>
-		<?php echo I18n::get('Previous') ?>
-	<?php endif ?>
+	<?php if (!empty($previous_page)) {
+		if ($previous_page !== FALSE): ?>
+			<a href="<?php echo HTML::chars($page->url($previous_page)) ?>" rel="prev"><?php echo I18n::get('Previous') ?></a>
+		<?php else: ?>
+			<?php echo I18n::get('Previous') ?>
+		<?php endif;
+	} ?>
 
 	<?php foreach ($links as $number => $content): ?>
 
@@ -79,16 +89,20 @@ for ($i = $n7; $i <= $n8; ++$i)
 
 	<?php endforeach ?>
 
-	<?php if ($next_page !== FALSE): ?>
-		<a href="<?php echo HTML::chars($page->url($next_page)) ?>" rel="next"><?php echo I18n::get('Next') ?></a>
-	<?php else: ?>
-		<?php echo I18n::get('Next') ?>
-	<?php endif ?>
+	<?php if (!empty($next_page)) {
+		if ($next_page !== FALSE): ?>
+			<a href="<?php echo HTML::chars($page->url($next_page)) ?>" rel="next"><?php echo I18n::get('Next') ?></a>
+		<?php else: ?>
+			<?php echo I18n::get('Next') ?>
+		<?php endif;
+	} ?>
 
-	<?php if ($last_page !== FALSE): ?>
-		<a href="<?php echo HTML::chars($page->url($last_page)) ?>" rel="last"><?php echo I18n::get('Last') ?></a>
-	<?php else: ?>
-		<?php echo I18n::get('Last') ?>
-	<?php endif ?>
+	<?php if (!empty($last_page)) {
+		if ($last_page !== FALSE): ?>
+			<a href="<?php echo HTML::chars($page->url($last_page)) ?>" rel="last"><?php echo I18n::get('Last') ?></a>
+		<?php else: ?>
+			<?php echo I18n::get('Last') ?>
+		<?php endif;
+	} ?>
 
 </p><!-- .pagination -->

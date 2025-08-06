@@ -42,7 +42,7 @@ class KO7_Cache_Sqlite extends Cache implements Cache_Tagging, Cache_GarbageColl
 		$this->_db = new PDO('sqlite:'.$database);
 
 		// Test for existing DB
-		$result = $this->_db->query("SELECT * FROM sqlite_master WHERE name = 'caches' AND type = 'table'")->fetchAll();
+		$result = $this->_db->query(/** @lang SQLite */ "SELECT * FROM sqlite_master WHERE name = 'caches' AND type = 'table'")->fetchAll();
 
 		// If there is no table, create a new one
 		if (0 == count($result))
@@ -77,7 +77,7 @@ class KO7_Cache_Sqlite extends Cache implements Cache_Tagging, Cache_GarbageColl
 	public function get($id, $default = NULL)
 	{
 		// Prepare statement
-		$statement = $this->_db->prepare('SELECT id, expiration, cache FROM caches WHERE id = :id LIMIT 0, 1');
+		$statement = $this->_db->prepare(/** @lang SQLite */ 'SELECT id, expiration, cache FROM caches WHERE id = :id LIMIT 0, 1');
 
 		// Try and load the cache based on id
 		try

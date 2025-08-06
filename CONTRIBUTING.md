@@ -7,11 +7,11 @@ All features and bugfixes must be fully tested and must have a reference to an i
 It's highly recommended that you write/run unit tests during development as it can help you pick up on issues early on.  See the Unit Testing section below.
 
 ## Cloning repo
-Go to https://github.com/koseven/koseven for each repo in the top right theres a button that says Fork. Click there to clone each repo. That will copy the repos to your github user, ex: https://github.com/neo22s/koseven
+Go to https://github.com/koseven/koseven for each repo in the top right theres a button that says Fork. Click there to clone each repo. That will copy the repos to your github user, ex: https://github.com/koseven/koseven
 
 Clone your project in local and use devel branch
 ```
-git clone git@github.com:neo22s/koseven.git
+git clone git@github.com:koseven/koseven.git
 cd koseven
 git checkout devel
 ```
@@ -37,7 +37,7 @@ git commit -a -m 'working closed etc  #725' # this will commit and mention an is
 ```
 
 ## Pull Requests
-Now you have new code at your fork ex https://github.com/neo22s/koseven. To move them to the original https://github.com/koseven/koseven repo you need to go to https://github.com/neo22s/koseven, and click on Pull Request (next to compare). This will create a pull request to the original code and the responsible will decide to merge it or not.
+Now you have new code at your fork ex https://github.com/koseven/koseven. To move them to the original https://github.com/koseven/koseven repo you need to go to https://github.com/koseven/koseven, and click on Pull Request (next to compare). This will create a pull request to the original code and the responsible will decide to merge it or not.
 
 Notes:
 - Try to submit pull requests against devel branch for easier merging

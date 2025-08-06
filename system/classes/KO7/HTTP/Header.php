@@ -35,7 +35,7 @@ class KO7_HTTP_Header extends ArrayObject {
 		{
 			$value = trim(str_replace(["\r", "\n"], '', $parts[$key]));
 
-			$pattern = '~\b(\;\s*+)?q\s*+=\s*+([.0-9]+)~';
+			$pattern = '~\b(;\s*+)?q\s*+=\s*+([.0-9]+)~';
 
 			// If there is no quality directive, return default
 			if ( ! preg_match($pattern, $value, $quality))
@@ -345,17 +345,17 @@ class KO7_HTTP_Header extends ArrayObject {
 	 * @param   mixed   $index      index to set `$newval` to
 	 * @param   mixed   $newval     new value to set
 	 * @param   boolean $replace    replace existing value
-	 * @return  void
+	 * @return  ?mixed
 	 * @since   3.2.0
 	 */
-	public function offsetSet(mixed $index, mixed $newval, bool $replace = TRUE): void
+	public function offsetSet(mixed $index, mixed $newval, bool $replace = TRUE)
 	{
 		// Ensure the index is lowercase
 		$index = strtolower($index);
 
 		if ($replace OR ! $this->offsetExists($index))
 		{
-			parent::offsetSet($index, $newval);
+			return parent::offsetSet($index, $newval);
 		}
 
 		$current_value = $this->offsetGet($index);

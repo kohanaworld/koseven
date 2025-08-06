@@ -6,10 +6,12 @@ Usage
 
 Where {task} is one of the following:
 
-<?php foreach($tasks as $task): ?>
-  * <?php echo $task; ?>
+<?php if (!empty($tasks)) {
+	foreach($tasks as $task): ?>
+	  * <?php echo $task; ?>
 
-<?php endforeach; ?>
+	<?php endforeach;
+} ?>
 
 For more information on what a task does and usage details execute 
 

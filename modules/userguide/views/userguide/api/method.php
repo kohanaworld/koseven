@@ -1,9 +1,13 @@
 <div class="method">
 
-<?php $declares = $doc->method->getDeclaringClass(); ?>
+<?php if (!empty($doc)) {
+	$declares = $doc->method->getDeclaringClass();
+} ?>
 <h3 id="<?php echo $doc->method->name ?>">
 	<?php echo $doc->modifiers, $doc->method->name ?>( <?php echo $doc->params ? $doc->params_short() : '' ?>)
-	<small>(defined in <?php echo html::anchor($route->uri(['class' => $declares->name]), $declares->name, NULL, NULL, TRUE) ?>)</small>
+	<small>(defined in <?php if (!empty($route)) {
+			echo html::anchor($route->uri(['class' => $declares->name]), $declares->name, NULL, NULL, TRUE);
+		} ?>)</small>
 </h3>
 
 <div class="description">
