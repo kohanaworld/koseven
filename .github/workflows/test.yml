@@ -16,5 +16,5 @@ jobs:
       - name: Install composer dependencies
         run: docker exec unittest /bin/sh -c "service redis-server start; cd /tmp/koseven; composer install"
 
-      - name: Run Koseven Unittest(s) PHP 8.3
+      - name: Run Koseven Unittest(s) PHP8.3
         run: docker exec unittest /bin/sh -c "cd /tmp/koseven; php vendor/bin/phpunit"
